@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background-color: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="url"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button, .history-link {
+            background-color: #ffdd57; 
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 20px; /* Added margin-bottom */
+        }
+        button:hover, .history-link:hover {
+            background-color: #28a745;
+        }
+        .logout-link {
+            display: block;
+            margin: 20px auto;
+            background-color: #dc3545; 
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            width: fit-content;
+        }
+        .logout-link:hover {
+            background-color: #c82333; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout-link">Logout</button>
+        </form>
+
+        <h1>Submit a URL for Checking</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="url" name="url" placeholder="Enter URL here" required>
+            <button type="submit">Check URL</button>
+        </form>
+
+        <a href="{% url 'history' %}" class="history-link">View History</a>
+    </div>
+</body>
+</html>

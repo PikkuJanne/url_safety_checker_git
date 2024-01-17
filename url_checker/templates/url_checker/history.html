@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Check History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background-color: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            text-align: left;
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .logout-link, .submit-link {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            width: fit-content;
+        }
+        .logout-link {
+            background-color: #dc3545;
+            color: white;
+        }
+        .logout-link:hover {
+            background-color: #c82333;
+        }
+        .submit-link {
+            background-color: #007bff;
+            color: white;
+        }
+        .submit-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Check History</h1>
+        <!-- Button at the top -->
+        <a href="{% url 'submit_url' %}" class="submit-link">Back to Submit URL</a>
+
+        <ul>
+            {% for url in user_urls %}
+                <li>
+                    <strong>URL:</strong> {{ url.url }} - 
+                    <strong>Status:</strong> {% if url.is_malicious %}Malicious{% else %}Safe{% endif %} - 
+                    <strong>Checked on:</strong> {{ url.checked_date }}
+                </li>
+            {% empty %}
+                <li>No URLs checked yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

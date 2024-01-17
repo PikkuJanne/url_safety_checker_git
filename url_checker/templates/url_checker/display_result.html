@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Check Result</title>
+</head>
+<body>
+    <div>
+        {% if url %}
+            <h1>Result for URL: {{ url.url }}</h1>
+            <p>Status: {% if url.is_malicious %}Malicious{% else %}Safe{% endif %}</p>
+            <p>Checked Date: {{ url.checked_date }}</p>
+        {% else %}
+            <h1>Error: {{ error }}</h1>
+        {% endif %}
+        <a href="{% url 'submit_url' %}">Check another URL</a>
+    </div>
+</body>
+</html>
+
+
